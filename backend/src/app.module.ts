@@ -7,6 +7,7 @@ import { join } from 'path'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { PrismaService } from './prisma/prisma.service'
+import { BooksModule } from './books/books.module'
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PrismaService } from './prisma/prisma.service'
     }),
     UsersModule,
     AuthModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
