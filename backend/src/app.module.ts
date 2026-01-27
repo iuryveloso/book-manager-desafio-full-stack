@@ -3,7 +3,6 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config'
 import { ServeStaticModule } from '@nestjs/serve-static'
-import { join } from 'path'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { PrismaService } from './prisma/prisma.service'
@@ -13,7 +12,7 @@ import { BooksModule } from './books/books.module'
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: 'public',
     }),
     UsersModule,
     AuthModule,
