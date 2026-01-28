@@ -75,7 +75,7 @@ export default function Dashboard() {
 
   return (
     <Layout
-      title={`${user ? user.name : "User"} books`}
+      title={`${user ? user.name : "User"}'s books`}
       user={user}
       onClickLogout={onClickLogout}
       alertState={alertState}

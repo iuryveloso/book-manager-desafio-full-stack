@@ -27,9 +27,9 @@ services:
     volumes:
       - ./backend:/backend
     working_dir: /backend
-    command: bash -c "npm install && npm run build && npm run start:prod"
+    command: bash -c "npm install && npx prisma generate && npm run build && npm run start:prod"
     depends_on:
-      - mongo
+      - postgres
 
   frontend:
     image: node:24
@@ -45,5 +45,4 @@ services:
       - backend
 
 volumes:
-  mongo_data:
-  rabbitmq_data:
+  postgres_data:
