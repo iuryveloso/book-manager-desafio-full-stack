@@ -1,19 +1,19 @@
-import { Button as UiButton } from '@/components/ui/button'
+import { Button as UiButton } from "@/components/ui/button";
 
 interface Button {
-  className?: string
-  onClick?: () => void
-  borderless?: boolean
-  underline?: boolean
-  disabled?: boolean
-  children: React.ReactNode
+  className?: string;
+  onClick?: () => void;
+  borderless?: boolean;
+  underline?: boolean;
+  disabled?: boolean;
+  children: React.ReactNode;
   variant?:
-    | 'default'
-    | 'link'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
+    | "default"
+    | "link"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost";
 }
 
 export default function Button({
@@ -25,17 +25,17 @@ export default function Button({
   children,
   variant,
 }: Button) {
-  const border = !borderless ? 'border border-gray-300' : ''
+  const border = !borderless ? "border border-gray-300" : "";
   return (
-    <div className={'flex'}>
+    <div className={"flex"}>
       <UiButton
-        className={`w-full ${underline ? 'underline' : ''} ${border} ${className}`}
-        variant={variant ?? 'default'}
+        className={`w-full ${underline ? "underline" : ""} ${border} ${className}`}
+        variant={variant ?? "default"}
         onClick={onClick}
         disabled={disabled}
       >
         {children}
       </UiButton>
     </div>
-  )
+  );
 }

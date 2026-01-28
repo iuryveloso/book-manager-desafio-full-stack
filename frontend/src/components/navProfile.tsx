@@ -18,6 +18,7 @@ export default function NavProfile({ user, onClickLogout }: NavProfile) {
     <div className={`flex flex-col items-center`}>
       <div className={"flex items-center"}>
         <Image
+          data-testid="navProfile_test"
           loader={({ src }) => src}
           unoptimized={true}
           src={user.avatar ? `${imagesDomain}/${user.avatar}` : "/user.svg"}

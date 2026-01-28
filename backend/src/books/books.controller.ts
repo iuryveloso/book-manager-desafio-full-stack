@@ -12,8 +12,8 @@ import {
 } from '@nestjs/common'
 import { BooksService } from './books.service'
 import { BookDto } from './dto/book.dto'
-import { AuthGuard } from 'src/auth/auth.guard'
-import { UserDto } from 'src/users/dto/user.dto'
+import { AuthGuard } from '../auth/auth.guard'
+import { UserDto } from '../users/dto/user.dto'
 
 interface RequestCustom extends Request {
   user?: UserDto

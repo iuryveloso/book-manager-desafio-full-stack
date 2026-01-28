@@ -11,12 +11,12 @@ import {
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { AuthGuard } from 'src/auth/auth.guard'
+import { AuthGuard } from '../auth/auth.guard'
 import { UpdatePasswordUserDto } from './dto/update-password-user.dto'
 import { UserDto } from './dto/user.dto'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { FileTypeValidator } from 'src/pipes/file-type-validator.pipe'
-import { FileSizeValidator } from 'src/pipes/file-size-validator.pipe'
+import { FileTypeValidator } from '../pipes/file-type-validator.pipe'
+import { FileSizeValidator } from '../pipes/file-size-validator.pipe'
 
 interface RequestCustom extends Request {
   user?: UserDto

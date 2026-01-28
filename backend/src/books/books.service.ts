@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common'
 import { BookDto } from './dto/book.dto'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from '../prisma/prisma.service'
 import { ConfigService } from '@nestjs/config'
 import { appendFile } from 'node:fs'
 import { Book } from './entities/book.entity'

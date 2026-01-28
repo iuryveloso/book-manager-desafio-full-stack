@@ -10,7 +10,7 @@ import { RegisterDto } from './dto/register.dto'
 import { appendFile } from 'node:fs'
 import { ConfigService } from '@nestjs/config'
 import type { Response } from 'express'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { PrismaService } from '../prisma/prisma.service'
 
 @Injectable()
 export class AuthService {

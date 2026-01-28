@@ -1,50 +1,48 @@
-import '@testing-library/jest-dom/vitest'
-import { describe, expect, it } from 'vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
-import NavProfile from './navProfile'
-import type { User } from '@/interfaces/userInterfaces'
-import type { NavigateFunction } from 'react-router'
+import "@testing-library/jest-dom";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import NavProfile from "./navProfile";
+import type { User } from "@/interfaces/userInterfaces";
 
 interface Mock {
-  user: User
-  navigate: NavigateFunction
-  onClickLogout: () => void
+  user: User;
+  onClickLogout: () => void;
 }
 
 const mock: Mock = {
-  navigate: () => {},
   user: {
-    name: 'Mock Name',
-    email: 'mock.email@email.com',
+    name: "Mock Name",
+    email: "mock.email@email.com",
   },
   onClickLogout: () => [],
-}
+};
 
-describe('NavProfile', () => {
-  render(
-    <NavProfile
-      user={mock.user}
-      navigate={mock.navigate}
-      onClickLogout={mock.onClickLogout}
-    />,
-  )
+describe("NavProfile", () => {
+  it("renders a profile image", async () => {
+    await act(async () =>
+      render(
+        <NavProfile user={mock.user} onClickLogout={mock.onClickLogout} />,
+      ),
+    );
+    const image = screen.getByTestId("navProfile_test");
+    expect(image).toBeInTheDocument();
+  });
 
-  it('renders a profile image', () => {
-    const image = screen.getAllByRole('img')[0]
-    expect(image).toBeInTheDocument()
-  })
+  it("renders hidden items", async () => {
+    await act(async () =>
+      render(
+        <NavProfile user={mock.user} onClickLogout={mock.onClickLogout} />,
+      ),
+    );
+    const clickableImage = screen.getByTestId("navProfile_test");
+    fireEvent.click(clickableImage);
 
-  it('renders hidden items', () => {
-    const button = screen.getAllByRole('img')[0]
-    fireEvent.click(button)
+    const userName = screen.getByText(mock.user.name);
+    expect(userName).toBeInTheDocument();
 
-    const userName = screen.getByText(mock.user.name)
-    expect(userName).toBeInTheDocument()
-
-    const buttons = screen.getAllByRole('button')
-    expect(buttons[0]).toBeInTheDocument()
-    expect(buttons[0]).toHaveTextContent('User profile')
-    expect(buttons[1]).toBeInTheDocument()
-    expect(buttons[1]).toHaveTextContent('Log out')
-  })
-})
+    const buttons = screen.getAllByRole("button");
+    expect(buttons[0]).toBeInTheDocument();
+    expect(buttons[0]).toHaveTextContent("User profile");
+    expect(buttons[1]).toBeInTheDocument();
+    expect(buttons[1]).toHaveTextContent("Log out");
+  });
+});
