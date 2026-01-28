@@ -49,6 +49,7 @@ export default function useUserReducer(user?: User) {
         ...userState,
         user,
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return { userState, userDispatch };

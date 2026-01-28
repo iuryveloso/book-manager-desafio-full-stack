@@ -55,7 +55,7 @@ export default function Auth() {
           <div className={"flex flex-col items-center"}>
             <div className={"container flex justify-center"}>
               <div className={"w-11/12 px-5 py-2 text-center lg:w-4/5"}>
-                <h1 className={"mt-3 pb-3 text-3xl"}>CLIMATE APP</h1>
+                <h1 className={"mt-3 pb-3 text-3xl"}>BOOKS MANAGER</h1>
               </div>
             </div>
             {!userState.showRegisterForm ? (

@@ -50,8 +50,12 @@ export class BooksService {
   ) {
     function paginateBooks(books: Book[], itemsPerPage: number) {
       const result: Book[][] = []
-      for (let i = 0; i < books.length; i += itemsPerPage) {
-        result.push(books.slice(i, i + itemsPerPage))
+      const pages = Math.ceil(books.length / itemsPerPage)
+      for (let i = 0; i < pages; i++) {
+        const firstItemIndex = i * itemsPerPage
+        const lastItemIndex = firstItemIndex + +itemsPerPage
+        const booksSlice = books.slice(firstItemIndex, lastItemIndex)
+        result.push(booksSlice)
       }
       return result
     }
@@ -59,8 +63,9 @@ export class BooksService {
     if (search) {
       const userData = await this.prisma.user.findUnique({
         where: { id: userID },
-        select: {
+        include: {
           books: {
+            orderBy: { title: 'asc' },
             where: {
               OR: [
                 { title: { contains: search, mode: 'insensitive' } },
@@ -78,14 +83,20 @@ export class BooksService {
           'Unable to get the books. Try again later',
         ])
 
-      const itemsChunked = paginateBooks(userData?.books, itemsPerPage)
-      return itemsChunked[page - 1] || []
+      const booksPaginated = paginateBooks(userData?.books, itemsPerPage)
+      return {
+        totalItems: userData.books.length,
+        totalPages: booksPaginated.length,
+        books: booksPaginated[page - 1] || [],
+      }
     }
 
     const userData = await this.prisma.user.findUnique({
       where: { id: userID },
-      select: {
-        books: true,
+      include: {
+        books: {
+          orderBy: { title: 'asc' },
+        },
       },
     })
 
@@ -94,8 +105,12 @@ export class BooksService {
         'Unable to get the books. Try again later',
       ])
 
-    const itemsChunked = paginateBooks(userData?.books, itemsPerPage)
-    return itemsChunked[page - 1] || []
+    const booksPaginated = paginateBooks(userData?.books, itemsPerPage)
+    return {
+      totalItems: userData.books.length,
+      totalPages: booksPaginated.length,
+      books: booksPaginated[page - 1] || [],
+    }
   }
 
   async findOne(userID: string, id: string) {
