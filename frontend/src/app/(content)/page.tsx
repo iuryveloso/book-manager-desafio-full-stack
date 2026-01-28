@@ -59,14 +59,7 @@ export default function Dashboard() {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    booksGet(
-      navigate.itemsPerPage,
-      navigate.page,
-      setBooks,
-      setNavigate,
-      alertState,
-      alertDispatch,
-    );
+    booksGet(navigate.itemsPerPage, navigate.page, setBooks, setNavigate);
   }, [alertDispatch, alertState, navigate.itemsPerPage, navigate.page]);
 
   function onClickLogout() {
@@ -115,8 +108,6 @@ export default function Dashboard() {
                         1,
                         setBooks,
                         setNavigate,
-                        alertState,
-                        alertDispatch,
                         navigate.search,
                       );
                       setNavigate((prev) => ({
@@ -240,14 +231,7 @@ export default function Dashboard() {
                     value={`${navigate.itemsPerPage}`}
                     onValueChange={(value) => {
                       const itemsPerPage = parseInt(value, 10);
-                      booksGet(
-                        itemsPerPage,
-                        1,
-                        setBooks,
-                        setNavigate,
-                        alertState,
-                        alertDispatch,
-                      );
+                      booksGet(itemsPerPage, 1, setBooks, setNavigate);
                       setNavigate((prev) => ({
                         ...prev,
                         itemsPerPage,
@@ -279,8 +263,6 @@ export default function Dashboard() {
                             navigate.page - 1,
                             setBooks,
                             setNavigate,
-                            alertState,
-                            alertDispatch,
                           );
                           setNavigate((prev) => ({
                             ...prev,
@@ -306,8 +288,6 @@ export default function Dashboard() {
                                 index + 1,
                                 setBooks,
                                 setNavigate,
-                                alertState,
-                                alertDispatch,
                               );
                               setNavigate((prev) => ({
                                 ...prev,
@@ -332,8 +312,6 @@ export default function Dashboard() {
                             navigate.page + 1,
                             setBooks,
                             setNavigate,
-                            alertState,
-                            alertDispatch,
                           );
                           setNavigate((prev) => ({
                             ...prev,

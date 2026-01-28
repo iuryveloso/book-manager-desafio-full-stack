@@ -23,8 +23,6 @@ export async function booksGet(
   page: number,
   setBooks: Dispatch<SetStateAction<Book[]>>,
   setNavigate: Dispatch<SetStateAction<Navigate>>,
-  alertState: AlertState,
-  alertDispatch: ActionDispatch<[action: AlertAction]>,
   search?: string,
 ) {
   await get(itemsPerPage, page, search).then((data) => {
@@ -33,12 +31,7 @@ export async function booksGet(
     }
 
     if (isErrors(data)) {
-      alertDispatch({
-        type: "setErrors",
-        ...alertState,
-        errors: data,
-      });
-      return;
+      redirect("/auth");
     }
 
     setNavigate((prev) => {
@@ -70,8 +63,6 @@ export async function bookGetCover(
 export async function bookShow(
   id: string,
   setBook: Dispatch<SetStateAction<Book>>,
-  alertState: AlertState,
-  alertDispatch: ActionDispatch<[action: AlertAction]>,
 ) {
   await show(id).then((data) => {
     if (isUnauthenticated(data)) {
@@ -79,12 +70,7 @@ export async function bookShow(
     }
 
     if (isErrors(data)) {
-      alertDispatch({
-        type: "setErrors",
-        ...alertState,
-        errors: data,
-      });
-      return;
+      redirect("/auth");
     }
 
     setBook(data);

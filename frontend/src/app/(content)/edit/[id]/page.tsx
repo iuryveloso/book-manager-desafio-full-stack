@@ -26,7 +26,7 @@ export default function Edit() {
   });
 
   useEffect(() => {
-    bookShow(params.id, setBook, alertState, alertDispatch);
+    bookShow(params.id, setBook);
   }, [alertDispatch, alertState, params.id]);
 
   function onClickLogout() {

@@ -6,7 +6,7 @@ services:
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     volumes:
-      - postgres_data:/var/lib/postgresql
+      - postgres_data_test:/var/lib/postgresql
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USERNAME}
@@ -27,7 +27,7 @@ services:
     volumes:
       - ./backend:/backend
     working_dir: /backend
-    command: bash -c "npm install && npx prisma generate && npm run build && npm run start:prod"
+    command: bash -c "npm install && npx prisma generate && npx prisma migrate dev --name init && npm run build && npm run start:prod"
     depends_on:
       - postgres
 
@@ -45,4 +45,4 @@ services:
       - backend
 
 volumes:
-  postgres_data:
+  postgres_data_test:
