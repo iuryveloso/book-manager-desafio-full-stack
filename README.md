@@ -1,92 +1,100 @@
-# 📘 Book Manager — Desafio Técnico Full-Stack
+# 📘 Book Manager Full Stack Challenge
 
-O objetivo do desafio é criar uma aplicação simples para gerenciamento de livros com autenticação JWT e CRUD completo.
+## Overview
 
-## Objetivo
-Construir uma aplicação full-stack chamada Book Manager, onde o usuário poderá:
+This project is a full-stack application designed to manage books, featuring both a backend and a frontend. It utilizes modern technologies and tools to provide a seamless user experience.
 
-- Criar conta
-- Fazer login
-- Listar livros
-- Criar livros
-- Editar livros
-- Excluir livros
+## Technologies Used
 
-As páginas internas devem ser protegidas por autenticação.
+### Backend
 
-## Tecnologias Obrigatórias
-- Nest.js (backend)
-- Next.js (frontend)
-- TypeScript
-- Postgres ou MySQL
-- TailwindCSS
+- **Node.js**: JavaScript runtime for building scalable network applications.
+- **NestJS**: A progressive Node.js framework for building efficient and scalable server-side applications.
+- **TypeScript**: A superset of JavaScript that compiles to plain JavaScript, providing static typing.
+- **Prisma**: An ORM (Object-Relational Mapping) tool for Node.js and TypeScript that simplifies database access.
+- **PostgreSQL**: A powerful, open-source relational database system.
+- **Docker**: A platform for developing, shipping, and running applications in containers.
 
-## Requisitos do Backend (Nest.js)
+### Frontend
 
-### Autenticação
-Implementar JWT com os endpoints:
+- **Next.js**: A React framework for building server-side rendered applications.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: Used in the frontend for type safety and better development experience.
+- **TailwindCSS**: A utility-first CSS framework for rapidly building custom user interfaces.
 
-- /auth/register — Criar usuário
-- /auth/login — Retornar token JWT
+## Main Features
 
-Rotas de livros devem exigir autenticação.
+- User authentication and authorization.
+- CRUD operations for managing books.
+- Responsive design for mobile and desktop views.
+- Dockerized environment for easy setup and deployment.
 
-### CRUD de Livros
+## Installation Instructions
 
-Rota      | Descrição |
------------|------------|
- /books    | Listar livros (com busca opcional por título) |
- /books/create    | Criar livro |
- /books/:id| Buscar por ID |
- /books/:id| Atualizar livro |
- /books/:id| Remover livro |
+1. **Clone the repository**:
 
-### Modelo Book
-- title — string, obrigatório
-- author — string, obrigatório
-- year — number, opcional
-- description — string, opcional
+   ```bash
+   git clone git@github.com:iuryveloso/book-manager-desafio-full-stack.git
+   cd book-manager-desafio-full-stack
+   ```
 
-### Banco
-- Usar Postgres ou MySQL
-- A estrutura do banco deve estar versionada no repositório, podendo ser feita de uma das formas:
-  - Migrations (TypeORM ou Prisma)
-  - Ou um arquivo SQL com a criação das tabelas (ex: `schema.sql`)
+2. **Set up environment variables**:
+   - Copy the `.env.example` files to `.env` in both the `backend` and `frontend` directories and fill in the required values.
 
-## Requisitos do Frontend (Next.js + Tailwind)
+3. **Install dependencies**:
+   This step is only necessary if you aren't using Docker for the next one.
+   - For the backend:
 
-Criar interface contendo:
+   ```bash
+   cd backend
+   npm install
+   npx prisma generate
+   ```
 
-### Páginas obrigatórias
-- /login
-- /books — listagem
-- /books/new — criação
-- /books/[id]/edit — edição
+   - For the frontend:
 
-### Funcionalidades
-- Autenticação e armazenamento do token
-- Proteção das páginas internas
-- Formulários funcionais
-- Estilização com Tailwind
-- Busca de livros por título
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-## O que será avaliado
-- Funcionamento do CRUD e autenticação
-- Organização e clareza do código
-- Boas práticas
-- Uso correto das tecnologias solicitadas
-- Estrutura de pastas backend/frontend
+4. **Run the application**:
+   **For Development**
+   - Using Docker:
 
-### Diferenciais
-- Dockerização do frontend e/ou backend
-- Deploy funcional da aplicação (com link)
-- Paginação no endpoint de listagem de livros
-  
+   ```bash
+   docker compose --file docker-compose-develop.yaml up -d
+   ```
 
-```
+   - Or run the backend and frontend separately:
 
-## Entrega
-Enviar o link do repositório contendo:
+   ```bash
+   cd backend
+   npm run start:dev
+   cd ../frontend
+   npm run dev
+   ```
 
-- Código do frontend e backend
-- README com instruções de execução
+   **For Production**
+   - Using Docker:
+
+   ```bash
+   docker compose --file docker-compose-production.yaml up -d
+   ```
+
+   - Or run the backend and frontend separately:
+
+   ```bash
+   cd backend
+   npm run build
+   npm run start:prod
+   cd ../frontend
+   npm run start
+   ```
+
+5. **Access the application**:
+   - Open your browser and navigate to `http://localhost:3000` for the frontend.
+
+---
+
+For more information, please refer to the individual README files in the `backend` and `frontend` directories.
