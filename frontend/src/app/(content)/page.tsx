@@ -5,7 +5,7 @@ import { authLogout } from "@/functions/authFunctions";
 import { Layout } from "@/components/layout";
 import useAlerts from "@/hooks/useAlerts";
 import { Book, Navigate } from "@/interfaces/bookInterfaces";
-import { bookRemove, booksGet } from "@/functions/bookFunctions";
+import { bookGetCover, bookRemove, booksGet } from "@/functions/bookFunctions";
 import {
   Item,
   ItemActions,
@@ -68,17 +68,6 @@ export default function Dashboard() {
       alertDispatch,
     );
   }, [alertDispatch, alertState, navigate.itemsPerPage, navigate.page]);
-
-  async function getBookCover(book: Book) {
-    setBookCover("/books_manager_transparent.svg");
-    const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(book.title)}&author=${encodeURIComponent(book.author)}&limit=1`;
-    const bookInfo = await fetch(url).then((res) => res.json());
-    if (bookInfo.docs && bookInfo.docs.length > 0 && bookInfo.docs[0].cover_i) {
-      setBookCover(
-        `https://covers.openlibrary.org/b/id/${bookInfo.docs[0].cover_i}-L.jpg`,
-      );
-    }
-  }
 
   function onClickLogout() {
     authLogout(alertState, alertDispatch);
@@ -157,7 +146,7 @@ export default function Dashboard() {
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button
-                                onClick={() => getBookCover(book)}
+                                onClick={() => bookGetCover(book, setBookCover)}
                                 className={"bg-cyan-500 cursor-pointer"}
                               >
                                 View

@@ -52,6 +52,21 @@ export async function booksGet(
     setBooks(data.books);
   });
 }
+
+export async function bookGetCover(
+  book: Book,
+  setBookCover: Dispatch<SetStateAction<string>>,
+) {
+  setBookCover("/books_manager_transparent.svg");
+  const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(book.title)}&author=${encodeURIComponent(book.author)}&limit=1`;
+  const bookInfo = await fetch(url).then((res) => res.json());
+  if (bookInfo.docs && bookInfo.docs.length > 0 && bookInfo.docs[0].cover_i) {
+    setBookCover(
+      `https://covers.openlibrary.org/b/id/${bookInfo.docs[0].cover_i}-L.jpg`,
+    );
+  }
+}
+
 export async function bookShow(
   id: string,
   setBook: Dispatch<SetStateAction<Book>>,

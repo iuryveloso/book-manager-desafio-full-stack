@@ -42,9 +42,7 @@ export default function New() {
             }
           >
             <div className={"p-4"}>
-              <label htmlFor="title" className={"text-lg"}>
-                Title
-              </label>
+              <label htmlFor="title">Title</label>
               <Input
                 id={"title"}
                 value={book.title}
@@ -54,9 +52,7 @@ export default function New() {
               />
             </div>
             <div className={"p-4"}>
-              <label htmlFor="author" className={"text-lg"}>
-                Author
-              </label>
+              <label htmlFor="author">Author</label>
               <Input
                 id={"author"}
                 value={book.author}
@@ -66,9 +62,7 @@ export default function New() {
               />
             </div>
             <div className={"p-4"}>
-              <label htmlFor="year" className={"text-lg"}>
-                Year
-              </label>
+              <label htmlFor="year">Year</label>
               <Input
                 type="number"
                 id={"year"}
@@ -82,9 +76,7 @@ export default function New() {
               />
             </div>
             <div className={"p-4"}>
-              <label htmlFor="description" className={"text-lg"}>
-                Description
-              </label>
+              <label htmlFor="description">Description</label>
               <Textarea
                 id={"description"}
                 value={book.description}
