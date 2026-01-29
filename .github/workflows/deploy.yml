@@ -1,0 +1,81 @@
+name: CI/CD Books Manager APP with Next.js and NestJS on AWS EC2
+
+on:
+  push:
+    branches:
+      - actions_test
+
+jobs:
+  test_backend:
+    name: Run tests on backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "24"
+
+      - name: Change directory
+        run: cd backend
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate prisma
+        run: npx prisma generate
+
+      - name: Format generated prisma
+        run: sh format_generated_prisma_for_tests.sh
+
+      - name: Run tests
+        run: npm test
+
+  test_frontend:
+    name: Run tests on frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "24"
+
+      - name: Change directory
+        run: cd frontend
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    name: Deploy on EC2
+    needs:
+      - test_backend
+      - test_frontend
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Configure and send to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/book-manager-desafio-full-stack
+            git pull origin main
+            docker compose down
+            docker compose --file docker-compose-production.yaml up -d
