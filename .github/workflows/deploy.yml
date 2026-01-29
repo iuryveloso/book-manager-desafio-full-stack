@@ -48,10 +48,6 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Change directory
-        run: cd frontend
-        working-directory: frontend
-
       - name: Install dependencies
         run: npm install
         working-directory: frontend
