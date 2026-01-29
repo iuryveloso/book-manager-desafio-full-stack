@@ -4,6 +4,9 @@
 
 This project is a full-stack application designed to manage books, featuring both a backend and a frontend. It utilizes modern technologies and tools to provide a seamless user experience.
 
+Testing Preview: http://ec2-34-207-185-237.compute-1.amazonaws.com
+   
+   
 ## Technologies Used
 
 ### Backend
