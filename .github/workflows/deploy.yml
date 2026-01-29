@@ -19,20 +19,21 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Change directory
-        run: cd backend
-
       - name: Install dependencies
         run: npm install
+        working-directory: backend
 
       - name: Generate prisma
         run: npx prisma generate
+        working-directory: backend
 
       - name: Format generated prisma
         run: sh format_generated_prisma_for_tests.sh
+        working-directory: backend
 
       - name: Run tests
         run: npm test
+        working-directory: backend
 
   test_frontend:
     name: Run tests on frontend
@@ -49,12 +50,15 @@ jobs:
 
       - name: Change directory
         run: cd frontend
+        working-directory: frontend
 
       - name: Install dependencies
         run: npm install
+        working-directory: frontend
 
       - name: Run tests
         run: npm test
+        working-directory: frontend
 
   deploy:
     name: Deploy on EC2
