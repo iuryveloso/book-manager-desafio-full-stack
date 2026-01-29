@@ -3,7 +3,7 @@ name: CI/CD Books Manager APP with Next.js and NestJS on AWS EC2
 on:
   push:
     branches:
-      - actions_test
+      - main
 
 jobs:
   test_backend:
